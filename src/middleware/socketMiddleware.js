@@ -43,7 +43,7 @@ const socketMiddleware = (function(){
         store.dispatch(actions.connecting());
 
         //Attempt to connect (we could send a 'failed' action on error)
-        socket = new WebSocket("ws://127.0.0.1:3030/shifting");
+        socket = new WebSocket("ws://192.168.1.33:3030/shifting");
         socket.onmessage = onMessage(socket,store);
         socket.onclose = onClose(socket,store);
         socket.onopen = onOpen(socket,store,action.token);

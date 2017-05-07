@@ -7,6 +7,10 @@ import * as Websocket from '../actions/Websocket';
 import Counter from '../components/Counter';
 import Footer from '../components/Footer';
 import Shifting from '../components/Shifting';
+import { DefaultPlayer as Video } from 'react-html5video';
+import 'react-html5video/dist/styles.css';
+
+
 
 /**
  * It is common practice to have a 'Root' container/component require our main App (this one).
@@ -26,6 +30,17 @@ class App extends Component {
         <Counter counter={counter} actions={actions} />
         {/*<Footer />*/}
         <Shifting move={move} actions={actionsShifting} websocket={websocket}/>
+
+        <Video className="video-container" autoPlay loop muted
+          controls={['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen']}
+          poster="http://sourceposter.jpg"
+          onCanPlayThrough={() => {
+              // Do stuff
+          }}>
+          <source src="http://localhost:3001/camera" type="video/webm" />
+          <track label="English" kind="subtitles" srcLang="en" src="http://source.vtt" default />
+      </Video>
+
       </div>
     );
   }

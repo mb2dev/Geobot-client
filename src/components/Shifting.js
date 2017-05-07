@@ -11,21 +11,8 @@ export default class Shiting extends Component {
      this.props.actions.moveRobot(type);
   }
 
-  handleForward(){
-   console.log("bonjour", this.props.actions);
-   this.props.actions.forward(this.props.websocket);
-  }
-
-  handleBackward(){
-    this.props.actions.backward();
-  }
-
-  handleLeft(){
-    this.props.actions.left();
-  }
-
-  handleRight(){
-    this.props.actions.right();
+  handleStop(){
+    this.props.actions.stopRobot();
   }
 
 
@@ -35,7 +22,7 @@ export default class Shiting extends Component {
         {/* Div Top Button */}
         {this.props.move}
         <div style={{display:"flex", flexDirection:"row", justifyContent:"center"}}>
-          <div onClick={() => {this.handleMoveRobot(MOVE_FORWARD);}}>
+          <div onMouseDown={() => {this.handleMoveRobot(MOVE_FORWARD);}} onMouseUp={() => {this.handleStop();}}>
             <a rel="nofollow" href="#">
               <span className="top"></span>
             </a>
@@ -45,17 +32,17 @@ export default class Shiting extends Component {
 
         {/* Div Bottom Button */}
         <div style={{display:"flex", flexDirection:"row", justifyContent:"center"}}>
-          <div onClick={() => {this.handleMoveRobot(MOVE_LEFT);}}>
+          <div onMouseDown={() => {this.handleMoveRobot(MOVE_LEFT);}} onMouseUp={()=>{this.handleStop();}}>
             <a rel="nofollow" href="#">
               <span className="left"></span>
             </a>
           </div>
-          <div onClick={() => {this.handleMoveRobot(MOVE_BACKWARD);}}>
+          <div onMouseDown={() => {this.handleMoveRobot(MOVE_BACKWARD);}} onMouseUp={()=>{this.handleStop();}}>
             <a rel="nofollow" href="#">
               <span className="bottom"></span>
             </a>
           </div>
-          <div onClick={() => {this.handleMoveRobot(MOVE_RIGHT);}}>
+          <div onMouseDown={() => {this.handleMoveRobot(MOVE_RIGHT);}} onMouseUp={()=>{this.handleStop();}}>
             <a rel="nofollow" href="#">
               <span className="right"></span>
             </a>

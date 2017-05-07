@@ -49,6 +49,7 @@
   "dependencies": {
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
+    "react-html5video": "^2.1.0",
     "react-redux": "^4.1.1",
     "redux": "^3.6.0",
     "redux-thunk": "^1.0.3",

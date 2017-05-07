@@ -1,5 +1,5 @@
 import * as ws from '../actions/Websocket'
-import {MOVE_FORWARD, MOVE_BACKWARD, MOVE_LEFT, MOVE_RIGHT} from '../constants/ActionTypes';
+import {MOVE_FORWARD, MOVE_BACKWARD, MOVE_LEFT, MOVE_RIGHT, STOP} from '../constants/ActionTypes';
 
 export function forward() {
 
@@ -18,6 +18,10 @@ export function right() {
     return {type: MOVE_RIGHT};
 }
 
+export function stop() {
+    return {type: STOP};
+};
+
 export function moveRobot(type) {
     console.log("here,type");
     return dispatch => {
@@ -30,7 +34,14 @@ export function moveRobot(type) {
             dispatch(left());
 
         } else if (type == MOVE_RIGHT) {
-            dispatch(left())
+            dispatch(right());
         }
     };
+}
+
+export function stopRobot() {
+    return dispatch => {
+        dispatch(ws.sendMsg(STOP));
+        dispatch(stop());
+    }
 }

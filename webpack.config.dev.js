@@ -47,6 +47,7 @@ module.exports = {
     }),
   ],
   module: {
+
     loaders: [
       {
         test: /\.js?/,
@@ -57,6 +58,10 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: 'style!css!sass'
+      },
+      {
+        test: /\.css$/,
+        loader: "style-loader!css-loader"
       }
     ]
   }
