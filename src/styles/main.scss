@@ -79,8 +79,6 @@ footer {
 }
 
 .shifting {
-
-
     a {
         text-align: center;
     }
@@ -174,11 +172,98 @@ footer {
         -webkit-transform: rotate(-45deg);
         transform: rotate(-45deg);
     }
+
+    .topCam {
+        display: inline-block;
+        width: 3em;
+        height: 3em;
+        border: 0.4em solid #333;
+        border-radius: 30%;
+        margin-top: 50px;
+    }
+
+    .topCam:after {
+        content: '';
+        display: inline-block;
+        margin-top: 1.1em;
+        width: 1em;
+        height: 1em;
+        border-top: 0.4em solid #333;
+        border-right: 0.4em solid #333;
+        -moz-transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+
+    .leftCam {
+        display: inline-block;
+        width: 3em;
+        height: 3em;
+        border: 0.4em solid #333;
+        border-radius: 30%;
+        margin-right: 60px;
+    }
+
+    .leftCam:after {
+        content: '';
+        display: inline-block;
+        margin-top: 1em;
+        margin-left: 0.6em;
+        width: 1em;
+        height: 1em;
+        border-top: 0.4em solid #333;
+        border-right: 0.4em solid #333;
+        -moz-transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+        transform: rotate(-135deg);
+    }
+
+    .rightCam {
+        display: inline-block;
+        width: 3em;
+        height: 3em;
+        border: 0.4em solid #333;
+        border-radius: 30%;
+    }
+
+    .rightCam:after {
+        content: '';
+        display: inline-block;
+        margin-top: 1em;
+        margin-right: 0.7em;
+        width: 1em;
+        height: 1em;
+        border-top: 0.4em solid #333;
+        border-right: 0.4em solid #333;
+        -moz-transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+
+    .bottomCam {
+        display: inline-block;
+        width: 3em;
+        height: 3em;
+        border: 0.4em solid #333;
+        border-radius: 30%;
+    }
+
+    .bottomCam::after {
+        content: '';
+        display: inline-block;
+        margin-top: 0.7em;
+        width: 1em;
+        height: 1em;
+        border-top: 0.4em solid #333;
+        border-right: 0.4em solid #333;
+        -moz-transform: rotate(135deg);
+        -webkit-transform: rotate(135deg);
+        transform: rotate(135deg);
+    }
 }
 
-.video-container{
-  width:40%;
-  height:40%;
-  margin-top: 20px;
-  margin-left: 310px;
+.video-container {
+    width: 40%;
+    height: 40%;
+    margin-top: 20px;
+    margin-left: 310px;
 }
