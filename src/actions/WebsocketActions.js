@@ -20,22 +20,21 @@ export function connected() {
 
 export function disconnected() {
     return {
-      type: ""
+      type: "DISCONNECTED"
     }
 }
 
 export function sendMsg(msg){
-  console.log("SEND");
+  //console.log("SEND");
   return {
-    type: "SEND_CHAT_MESSAGE",
-    "msg": msg
+    type: "SEND_MESSAGE",
+    msg
   }
 }
 
-
-
-export function messageReceived() {
+export function messageReceived(msg) {
     return {
-      type: "disco"
+      type: "RECEIVED_MESSAGE",
+      msg
     }
 }

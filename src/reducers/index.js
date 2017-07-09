@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import counter from './counter';
-import shifting from './shifting';
+import robotController from './robotController';
+import camController from './camController';
 
 /**
  * combineReducers is important to understand. As your app might grow in size
@@ -16,7 +16,8 @@ import shifting from './shifting';
  * More info: http://rackt.org/redux/docs/api/combineReducers.html
  */
 const rootReducer = combineReducers({
-  counter,shifting // you might be used to: counter: counter,
+  robotController,
+  camController,
 });
 
 export default rootReducer;

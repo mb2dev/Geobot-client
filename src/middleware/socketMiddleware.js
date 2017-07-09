@@ -1,11 +1,12 @@
-import * as actions from '../actions/Websocket'
+import * as actions from '../actions/WebsocketActions'
 
+const addr = "ws://192.168.1.26:3030/shifting";
 
-const socketMiddleware = (function(){
+const socketMiddleware = (function(addr){
   var socket = null;
 
   const onOpen = (ws,store,token) => evt => {
-    console.log("here");
+    console.log("onOpen");
     console.log(ws,actions,store);
     //Set our state to disconnected
     store.dispatch(actions.connected());
@@ -19,9 +20,9 @@ const socketMiddleware = (function(){
   const onMessage = (ws,store) => evt => {
     //Parse the JSON message received on the websocket
     var msg = JSON.parse(evt.data);
-    console.log("msgReceive",msg);
+    console.log("onMessage", msg);
     switch(msg.type) {
-      case "CHAT_MESSAGE":
+      case "WS_MESSAGE":
         //Dispatch an action that adds the received message to our state
         store.dispatch(actions.messageReceived(msg));
         break;
@@ -37,13 +38,14 @@ const socketMiddleware = (function(){
       case 'CONNECT':
         //Start a new connection to the server
         if(socket != null) {
-          socket.close();
+          return;
+          // socket.close();
         }
         //Send an action that shows a "connecting..." status for now
         store.dispatch(actions.connecting());
 
         //Attempt to connect (we could send a 'failed' action on error)
-        socket = new WebSocket("ws://192.168.1.33:3030/shifting");
+        socket = new WebSocket(addr);
         socket.onmessage = onMessage(socket,store);
         socket.onclose = onClose(socket,store);
         socket.onopen = onOpen(socket,store,action.token);
@@ -61,15 +63,15 @@ const socketMiddleware = (function(){
         break;
 
       //Send the 'SEND_MESSAGE' action down the websocket to the server
-      case 'SEND_CHAT_MESSAGE':
+      case 'SEND_MESSAGE':
         socket.send(JSON.stringify(action.msg));
-        break;
+      break;
 
       //This action is irrelevant to us, pass it on to the next middleware
       default:
         return next(action);
     }
   }
-})();
+})(addr);
 
 export default socketMiddleware

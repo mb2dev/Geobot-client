@@ -1,7 +1,6 @@
 import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../constants/ActionTypes';
 
 export function increment() {
-  console.log("tt");
   return {
     type: INCREMENT_COUNTER
   };

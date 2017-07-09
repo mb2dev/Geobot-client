@@ -18,4 +18,6 @@ export const MOVECAM_UP = 'MOVECAM_UP';
 export const MOVECAM_DOWN = 'MOVECAM_DOWN';
 export const MOVECAM_LEFT = 'MOVECAM_LEFT';
 export const MOVECAM_RIGHT = 'MOVECAM_RIGHT';
-export const STOPCAM = 'STOPCAM';
+export const STOP_CAM = 'STOP_CAM';
+export const START_CAM = 'START_CAM';
+export const STILL = 'STILL';

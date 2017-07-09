@@ -1,16 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as CounterActions from '../actions/CounterActions';
-import * as ShiftingActions from '../actions/ShiftingActions';
-import * as Websocket from '../actions/Websocket';
-import Counter from '../components/Counter';
-import Footer from '../components/Footer';
-import Shifting from '../components/Shifting';
-import { DefaultPlayer as Video } from 'react-html5video';
-import 'react-html5video/dist/styles.css';
-
-
+import * as Websocket from '../actions/WebsocketActions';
+import * as RobotControllerActions from '../actions/RobotControllerActions';
+import RobotController from '../components/RobotController';
+import * as CamControllerActions from '../actions/CamControllerActions';
+import CamController from '../components/CamController';
+// import * as CounterActions from '../actions/CounterActions';
+// import Counter from '../components/Counter';
+// import Footer from '../components/Footer';
+// import { DefaultPlayer as Video } from 'react-html5video';
+// import 'react-html5video/dist/styles.css';
 
 /**
  * It is common practice to have a 'Root' container/component require our main App (this one).
@@ -20,36 +20,27 @@ import 'react-html5video/dist/styles.css';
 class App extends Component {
   render() {
     // we can use ES6's object destructuring to effectively 'unpack' our props
-    console.log(this.props);
-    const { counter, actions, actionsShifting,move,websocket} = this.props;
+    console.log("App", this.props);
+    const { robot_actions, cam_actions, robot_move, cam_move, websocket } = this.props;
+    const streamUrl = robot_move === "STOP_CAM" ? "" : "http://192.168.1.26:8080/?action=stream";
     return (
       <div className="main-app-container">
-
-        <div className="main-app-nav">Simple Redux Template</div>
-        {/* notice that we then pass those unpacked props into the Counter component */}
-        <Counter counter={counter} actions={actions} />
-        {/*<Footer />*/}
-        <Shifting move={move} actions={actionsShifting} websocket={websocket}/>
-
-        <Video className="video-container" autoPlay loop muted
-          controls={['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen']}
-          poster="http://sourceposter.jpg"
-          onCanPlayThrough={() => {
-              // Do stuff
-          }}>
-          <source src="http://localhost:3001/camera" type="video/webm" />
-          <track label="English" kind="subtitles" srcLang="en" src="http://source.vtt" default />
-      </Video>
-
+        <RobotController move={robot_move} actions={robot_actions} websocket={websocket}/>
+        <CamController move={cam_move} actions={cam_actions} websocket={websocket}/>
+        <img src={streamUrl} style={{transform: "rotate(180deg)"}}/>
       </div>
     );
   }
 }
 
 App.propTypes = {
-  move: PropTypes.string,
-  counter: PropTypes.number.isRequired,
-  actions: PropTypes.object.isRequired
+  // counter: PropTypes.number.isRequired,
+  robot_actions: PropTypes.object.isRequired,
+  cam_actions: PropTypes.object.isRequired,
+  websocket: PropTypes.object.isRequired,
+  robot_move: PropTypes.string.isRequired,
+  cam_move: PropTypes.string.isRequired,
+  camera: PropTypes.string.isRequired,
 };
 
 /**
@@ -59,8 +50,9 @@ App.propTypes = {
  */
 function mapStateToProps(state) {
   return {
-    counter: state.counter,
-    move: state.move,
+    robot_move: state.robot_move,
+    cam_move : state.cam_move,
+    camera : state.camera,
   };
 }
 
@@ -74,10 +66,9 @@ function mapStateToProps(state) {
  */
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(CounterActions, dispatch),
-    actionsShifting: bindActionCreators(ShiftingActions, dispatch),
-    websocket:bindActionCreators(Websocket,dispatch)
-
+    cam_actions: bindActionCreators(CamControllerActions, dispatch),
+    robot_actions: bindActionCreators(RobotControllerActions, dispatch),
+    websocket: bindActionCreators(Websocket,dispatch)
   };
 }
 
