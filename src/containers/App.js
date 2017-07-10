@@ -1,16 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as Websocket from '../actions/WebsocketActions';
-import * as RobotControllerActions from '../actions/RobotControllerActions';
+import { WebsocketActions, RobotControllerActions, CamControllerActions } from '../actions';
 import RobotController from '../components/RobotController';
-import * as CamControllerActions from '../actions/CamControllerActions';
 import CamController from '../components/CamController';
-// import * as CounterActions from '../actions/CounterActions';
-// import Counter from '../components/Counter';
-// import Footer from '../components/Footer';
-// import { DefaultPlayer as Video } from 'react-html5video';
-// import 'react-html5video/dist/styles.css';
 
 /**
  * It is common practice to have a 'Root' container/component require our main App (this one).
@@ -25,8 +18,8 @@ class App extends Component {
     const streamUrl = robot_move === "STOP_CAM" ? "" : "http://192.168.1.26:8080/?action=stream";
     return (
       <div className="main-app-container">
-        <RobotController move={robot_move} actions={robot_actions} websocket={websocket}/>
-        <CamController move={cam_move} actions={cam_actions} websocket={websocket}/>
+        {/*<RobotController move={robot_move} actions={robot_actions} websocket={websocket}/>
+        <CamController move={cam_move} actions={cam_actions} websocket={websocket}/>*/}
         <img src={streamUrl} style={{transform: "rotate(180deg)"}}/>
       </div>
     );
@@ -68,7 +61,7 @@ function mapDispatchToProps(dispatch) {
   return {
     cam_actions: bindActionCreators(CamControllerActions, dispatch),
     robot_actions: bindActionCreators(RobotControllerActions, dispatch),
-    websocket: bindActionCreators(Websocket,dispatch)
+    websocket: bindActionCreators(WebsocketActions, dispatch)
   };
 }
 

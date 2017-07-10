@@ -24,11 +24,18 @@ export default class CamController extends Component {
     this.props.actions.stopCamera();
   }
 
+  handleRecordCam(){
+    this.props.actions.recordCamera();
+  }
+
   render() {
     return (
       <div className="shifting"  style={{display:"flex", flexDirection:"row", justifyContent:"center"}}>
-        <button onMouseDown={() => { this.handleStartCam(); }}>Start</button>
-        <button onMouseDown={() => { this.handleStopCam(); }}>Stop</button>
+        <label><input type="radio" name="videomode" value="Replay" onMouseDown={() => { this.handleStopCam(); }}/>Replay</label>
+        <label><input type="radio" name="videomode" value="Live" onMouseDown={() => { this.handleStartCam(); }}/>Live</label>
+        <button>Start</button>
+        <button>Stop</button>
+        <button onMouseDown={() => { this.handleRecordCam(); }}>Record</button>
         <div style={{display:"flex", flexDirection:"column", justifyContent:"center", margin:"0 0 0 50px"}}>
           <div style={{display:"flex", flexDirection:"row", justifyContent:"center"}}>
             <div onMouseDown={() => {this.handleMoveCam(MOVECAM_UP);}} onMouseUp={() => {this.handleStopCamMove();}}>

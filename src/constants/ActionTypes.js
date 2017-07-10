@@ -21,3 +21,4 @@ export const MOVECAM_RIGHT = 'MOVECAM_RIGHT';
 export const STOP_CAM = 'STOP_CAM';
 export const START_CAM = 'START_CAM';
 export const STILL = 'STILL';
+export const RECORDING = 'RECORDING';

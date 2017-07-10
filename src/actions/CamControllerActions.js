@@ -1,5 +1,5 @@
 import * as ws from '../actions/WebsocketActions'
-import {MOVECAM_UP, MOVECAM_DOWN, MOVECAM_LEFT, MOVECAM_RIGHT, STOP_CAM, START_CAM, STILL} from '../constants/ActionTypes';
+import {MOVECAM_UP, MOVECAM_DOWN, MOVECAM_LEFT, MOVECAM_RIGHT, STOP_CAM, START_CAM, STILL, RECORDING} from '../constants/ActionTypes';
 
 export function up(){
   return {type: MOVECAM_UP};
@@ -22,6 +22,9 @@ export function stop() {
 export function start() {
     return {type: START_CAM};
 }
+export function record() {
+    return { type: RECORDING };
+}
 
 export function moveCam(type) {
     return dispatch => {
@@ -36,6 +39,13 @@ export function moveCam(type) {
           dispatch(right());
         }
     };
+}
+
+export function recordCamera(){
+  return dispatch => {
+    dispatch(ws.sendMsg(RECORDING));
+    dispatch(record());
+  }
 }
 
 export function stopCamMove() {
